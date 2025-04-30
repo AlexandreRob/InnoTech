@@ -1,0 +1,73 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ develop, main ]
+  pull_request:
+    branches: [ develop, main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: app_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      mongo:
+        image: mongo:5
+        ports:
+          - 27017:27017
+
+    steps:
+      - name: 🔄 Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: 📁 Install backend dependencies
+        working-directory: backend
+        run: npm install
+
+      - name: 📁 Install frontend dependencies
+        working-directory: frontend
+        run: npm install
+
+      - name: ✅ Lint frontend (optional)
+        working-directory: frontend
+        run: |
+          if [ -f .eslintrc.js ] || [ -f .eslintrc.json ]; then
+            npm run lint
+          else
+            echo "No linter config found. Skipping lint step."
+          fi
+
+      - name: ⚒️ Build frontend
+        working-directory: frontend
+        run: npm run build
+
+      - name: 🚀 Test backend startup
+        working-directory: backend
+        env:
+          POSTGRES_URL: postgres://postgres:postgres@localhost:5432/app_db
+          MONGO_URL: mongodb://localhost:27017/app_db
+          PORT: 5000
+        run: |
+          npm run build || true
+          node server.js &
+          sleep 5
+          curl --fail http://localhost:5000/api || exit 1
