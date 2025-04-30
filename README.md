@@ -1,43 +1,43 @@
 # InnoTech
 
-Ce projet est une application web fullstack utilisant React pour le frontend, Express.js pour l'API backend, PostgreSQL pour les données relationnelles et MongoDB pour les données NoSQL.
+This project is a fullstack web application using React for the frontend, Express.js for the backend API, PostgreSQL for relational data, and MongoDB for NoSQL data.
 
 ---
 
-## 📁 Structure du projet
+## 📁 Project Structure
 
 .
 ├── backend/ # API Express (Node.js)
-│ ├── db/ # Connexions à PostgreSQL et MongoDB
-│ ├── models/ # Modèles MongoDB (via Mongoose)
-│ ├── routes/ # Définition des routes de l'API
-│ ├── server.js # Point d’entrée du serveur Express
-│ └── .env # Variables d’environnement pour le backend
+│ ├── db/ # PostgreSQL and MongoDB connections
+│ ├── models/ # MongoDB models (via Mongoose)
+│ ├── routes/ # API route definitions
+│ ├── server.js # Express server entry poin
+│ └── .env # Backend environment variables
 │
-├── frontend/ # Application frontend React
-│ └── .env # Variables d’environnement pour le frontend
+├── frontend/ # React frontend application
+│ └── .env # Frontend environment variables
 │
-├── docker-compose.yml # Configuration Docker multi-conteneurs
-└── README.md # Documentation du projet
+├── docker-compose.yml # Docker multi-container configuration
+└── README.md # Project documentation
 
 ---
 
-## ⚙️ Installation et configuration de l’environnement
+## ⚙️ Installation and Environment Setup
 
-### 1. Prérequis
+### 1. Requirements
 
 - [Docker](https://www.docker.com/)
-- [Node.js](https://nodejs.org/) (si développement local hors Docker)
+- [Node.js](https://nodejs.org/) (for local development without Docker)
 - [Git](https://git-scm.com/)
 
-### 2. Cloner le projet
+### 2. Clone the Project
 
-```bash
+````bash
 git clone https://github.com/AlexandreRob/InnoTech.git
 cd InnoTech
 ```
 
-### 2. Configurer les fichiers
+### 2. Configure .env Files
 
 Backend : backend/.env
 
@@ -45,7 +45,7 @@ Backend : backend/.env
 PORT=5000
 POSTGRES_URL=postgres://postgres:postgres@postgres:5432/app_db
 MONGO_URL=mongodb://mongo:27017/app_db
-```
+````
 
 Frontend : frontend/.env
 
@@ -53,9 +53,9 @@ Frontend : frontend/.env
 REACT_APP_API_URL=http://localhost:5000/api
 ```
 
-# 🐳 Lancer les conteneurs Docker
+## 🐳 Running the Docker Containers
 
-### Construction et lancement
+### Build and Start
 
 ```bash
 docker-compose up --build
@@ -65,15 +65,15 @@ docker-compose up --build
 
 - Backend (API) sur http://localhost:5000
 
-- PostgreSQL & MongoDB sont accessibles à l’intérieur des conteneurs.
+- PostgreSQL & MongoDB are available inside the Docker network.
 
-### Arrêt des conteneurs
+### Stop Containers
 
 ```bash
 docker-compose down
 ```
 
-# 💻 Développement local
+## 💻 Local Development
 
 ### Backend
 
@@ -91,36 +91,37 @@ npm install
 npm start
 ```
 
-# 📚 Utilisation de Git (flux de branches collaboratif)
+## 📚 Git Workflow (Collaborative Branching Strategy)
 
-### Branches principales
+### Main Branches
 
-- main : code stable et déployable
+- main : stable, deployable code
 
-- develop : dernière version de développement
+- develop : latest development version
 
-### Branches secondaires
+### Supporting Branches
 
-- feature/nom-fonctionnalité : développement d’une nouvelle fonctionnalité
+- feature/nom-fonctionnalité : new features
 
-- bugfix/description : correction de bugs
+- bugfix/description : bug fixes
 
-- hotfix/urgent : correctifs rapides sur main
+- hotfix/urgent : critical fixes directly on main
 
 ### Exemple de flux de travail
 
 ```bash
-# Créer une nouvelle branche fonctionnelle
+# Create a new feature branch
 git checkout develop
 git pull origin develop
-git checkout -b feature/inscription-utilisateur
+git checkout -b feature/user-signup
 
-# Travailler, commiter
+# Work and commit changes
 git add .
-git commit -m "feat: ajout formulaire d'inscription"
+git commit -m "feat: add user signup form"
 
-# Pousser la branche
-git push origin feature/inscription-utilisateur
+# Push the branch
+git push origin feature/user-signup
 
-# Créer une Pull Request vers `develop` sur GitHub
+# Open a Pull Request to `develop` on GitHub
+
 ```
