@@ -6,19 +6,7 @@ Ce projet est une application web fullstack utilisant React pour le frontend, Ex
 
 ## 📁 Structure du projet
 
-.
-├── backend/ # API Express (Node.js)
-│ ├── db/ # Connexions à PostgreSQL et MongoDB
-│ ├── models/ # Modèles MongoDB (via Mongoose)
-│ ├── routes/ # Définition des routes de l'API
-│ ├── server.js # Point d’entrée du serveur Express
-│ └── .env # Variables d’environnement pour le backend
-│
-├── frontend/ # Application frontend React
-│ └── .env # Variables d’environnement pour le frontend
-│
-├── docker-compose.yml # Configuration Docker multi-conteneurs
-└── README.md # Documentation du projet
+<pre> ## 📁 Structure du projet ``` . ├── backend/ # API Express (Node.js) │ ├── db/ # Connexions à PostgreSQL et MongoDB │ ├── models/ # Modèles MongoDB (via Mongoose) │ ├── routes/ # Définition des routes de l'API │ ├── server.js # Point d’entrée du serveur Express │ └── .env # Variables d’environnement pour le backend │ ├── frontend/ # Application frontend React │ └── .env # Variables d’environnement pour le frontend │ ├── docker-compose.yml # Configuration Docker multi-conteneurs └── README.md # Documentation du projet ``` </pre>
 
 ---
 
